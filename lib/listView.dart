@@ -43,7 +43,11 @@ class _listViewState extends State<listView> {
           }
         },
         builder:(context,state){
-          if(cubit.checkConnectivityname=="connected" ||state is ConnectedState){
+          if(//cubit.checkConnectivityname=="not connect" ||
+              state is NotConnectedState &&cubit.listViewdata.isEmpty==true){
+            return _buildTextWidget(state.message);
+
+          }else{
             if (cubit.loading==true) {
               return const Center(child: CircularProgressIndicator(color: Colors.orange,),);
             }
@@ -98,9 +102,6 @@ class _listViewState extends State<listView> {
                     );
                   }, itemCount:cubit.listViewdata.length);
             }
-          }else{
-            return _buildTextWidget("not connected");
-
           }
 
 
